@@ -3,23 +3,23 @@ import mailChannelsPlugin from "@cloudflare/pages-plugin-mailchannels";
 export const onRequest: PagesFunction = (context) => mailChannelsPlugin({
   personalizations: [
     {
-      to: [{ name: "Some User", email: "uwe@idle.btx.blue" }],
-      "dkim_domain": "example.com", // The value has to be the domain you added DKIM records to and where you're sending your email from
-      "dkim_selector": "mailchannels",
-      "dkim_private_key": context.env.DKIM_PRIVATE_KEY
+      to: [{ name: "Kontaktformular", email: "uwe@idle.btx.blue" }],
     },
   ],
   from: {
     name: "ACME Support",
-    email: "support@example.com",
+    email: "formular@carinaschwarz.dog",
   },
   reply_to: {
-    name: "reply",
+    name: context.env.DKIM_PRIVATE_KEY,
     email: "mail@example.org",
   },
   respondWith: () => {
-    return new Response(
-      `Thank you for submitting your enquiry. A member of the team will be in touch shortly.`
-    );
+    return new Response(null, {
+      status: 302,
+      headers: {
+        location: "/nachricht-gesendet/"
+      },
+    });
   },
 })(context);
