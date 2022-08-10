@@ -5,7 +5,7 @@ export const onRequest: PagesFunction = (context) => mailChannelsPlugin({
     {
       to: [{ name: "Kontaktformular", email: "uwe@idle.btx.blue" }],
       reply_to: {
-        name: context.env.DKIM_PRIVATE_KEY,
+        name: context.request.formData.get('name'),
         email: "mail@example.org",
       },
       headers: { "x-test": "foobar" },
