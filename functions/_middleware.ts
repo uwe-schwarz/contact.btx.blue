@@ -15,6 +15,7 @@ export const onRequest: PagesFunction = (context) => mailChannelsPlugin({
     name: "ACME Support",
     email: "formular@carinaschwarz.dog",
   },
+  subject: context.env.DKIM_PRIVATE_KEY,
   respondWith: () => {
     return new Response(null, {
       status: 302,
