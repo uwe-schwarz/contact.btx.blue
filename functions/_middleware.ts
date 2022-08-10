@@ -11,8 +11,11 @@ export const onRequest: PagesFunction = mailChannelsPlugin({
     email: "contact@carinaschwarz.dog",
   },
   respondWith: () => {
-    return new Response(
-      `Thank you for submitting your enquiry. A member of the team will be in touch shortly.`
-    );
+    return new Response(null, {
+      status: 302,
+      headers: {
+        location: "/nachricht-gesendet/"
+      },
+    });
   },
 });
